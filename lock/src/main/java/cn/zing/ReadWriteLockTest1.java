@@ -1,4 +1,4 @@
-package cn.zing.daily.lock;
+package cn.zing;
 
 import lombok.extern.slf4j.Slf4j;
 
