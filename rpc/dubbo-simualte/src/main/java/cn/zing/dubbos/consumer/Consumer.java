@@ -1,7 +1,6 @@
 package cn.zing.dubbos.consumer;
 
-import cn.zing.dubbos.framework.Invocation;
-import cn.zing.dubbos.framework.protocol.http.HttpClient;
+import cn.zing.dubbos.framework.ProxyFactory;
 import cn.zing.dubbos.provider.api.HelloService;
 
 /**
@@ -13,9 +12,9 @@ public class Consumer {
 
     public static void main(String[] args) {
 
-        HttpClient httpClient = new HttpClient();
-        Invocation invocation = new Invocation(HelloService.class.getName(), "sayHello", new Object[]{"DCY"}, new Class[]{String.class});
-        String res = httpClient.send("localhost", 8080, invocation);
+        HelloService helloService = ProxyFactory.getProxy(HelloService.class);
+        String res = helloService.sayHello("张三");
+
         System.out.println("收到---->" + res);
 
     }

@@ -1,7 +1,8 @@
 package cn.zing.dubbos.provider;
 
-import cn.zing.dubbos.framework.protocol.http.HttpServer;
-import cn.zing.dubbos.framework.register.LocalRegister;
+import cn.zing.dubbos.framework.Protocol;
+import cn.zing.dubbos.framework.ProtocolFactory;
+import cn.zing.dubbos.framework.URL;
 import cn.zing.dubbos.provider.api.HelloService;
 import cn.zing.dubbos.provider.impl.HelloServiceImpl;
 
@@ -13,11 +14,12 @@ import cn.zing.dubbos.provider.impl.HelloServiceImpl;
 public class Provider {
 
     public static void main(String[] args) {
-        // 本地注册
-        LocalRegister.regist(HelloService.class.getName(), HelloServiceImpl.class);
 
-        HttpServer httpServer = new HttpServer();
-        httpServer.start("localhost", 8080);
+
+        URL url = new URL("dubbo", "localhost", 8080, HelloService.class.getName(), HelloServiceImpl.class);
+
+        Protocol protocol = ProtocolFactory.getProtocol("dubbo");
+        protocol.export(url);
     }
 }
 
