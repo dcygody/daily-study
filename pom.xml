@@ -10,6 +10,7 @@
         <module>lock</module>
         <module>leetcode</module>
         <module>netty-demo</module>
+        <module>rpc</module>
     </modules>
     <name>daily</name>
     <description>Demo project for Spring Boot</description>
