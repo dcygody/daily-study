@@ -9,6 +9,7 @@
     <modules>
         <module>lock</module>
         <module>leetcode</module>
+        <module>netty-decoder</module>
     </modules>
     <name>daily</name>
     <description>Demo project for Spring Boot</description>

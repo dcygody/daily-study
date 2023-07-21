@@ -1,0 +1,96 @@
+{
+  "readIMEI": {
+    "mn": "mn",
+    "type": "readIMEI"
+  },
+  "getimei": "rrpc,getimei",
+  "minute_data": {
+    "mn": "GW10761",
+    "type": "minute_data"
+  },
+  "lock": {
+    "mn": "GW10761",
+    "Command": "F5F5000100000000",
+    "type": "switch"
+  },
+  "fan": {
+    "mn": "GW10761",
+    "Command": "F5FE0101010000000000",
+    "type": "switch"
+  },
+  "temp": {
+    "mn": "GW10761",
+    "Command": "F0F00023",
+    "type": "temp"
+  },
+  "XYZ": {
+    "mn": "GW10761",
+    "type": "XYZ"
+  },
+  "4G": {
+    "ip": "60.2.216.210",
+    "mn": "GW10761",
+    "port": 10709,
+    "type": "ServerConfig"
+  },
+  "NET": {
+    "ip": "60.2.216.210",
+    "mn": "GW10761",
+    "port": 10709,
+    "type": "ServerNetConfig"
+  },
+  "LocalPort": {
+    "Command": "config",
+    "Gateway": "192.168.1.1",
+    "LocalIP": "192.168.1.118",
+    "DNS": "192.168.1.1",
+    "DHCP": false,
+    "NetMask": "255.255.255.0",
+    "mn": "GW10761",
+    "type": " LocalPort "
+  },
+  "restart": {
+    "mn": "GW10761",
+    "type": "restart"
+  },
+  "para_data": {
+    "mn": "GW10772",
+    "type": "para_data"
+  },
+  "WarnConfig": {
+    "AF": 10,
+    "AR": 10,
+    "AS": 1,
+    "CSQ": 18,
+    "CSQR": 5,
+    "CSQS": 1,
+    "HF": 80,
+    "HR": 10,
+    "HS": 1,
+    "IT": 6,
+    "TF": 65,
+    "TR": 5,
+    "TS": 1,
+    "VFH": 240,
+    "VFL": 210,
+    "VFS": 0,
+    "VLS": 0,
+    "VRH": 10,
+    "VRL": 10,
+    "DOORS": 0,
+    "LEAKS": 0,
+    "SMOOKS": 0,
+    "mn": "GW10761",
+    "type": "WarnConfig"
+  },
+  "CJJG": {
+    "cjjg": 60,
+    "cjjgnet": 1,
+    "mn": "GW10761",
+    "type": "CJJG"
+  },
+  "readXYZ": {
+    "mn": "GW10761",
+    "type": "readXYZ"
+  }
+}
