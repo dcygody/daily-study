@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>lock</module>
+        <module>juc</module>
         <module>leetcode</module>
         <module>netty-demo</module>
         <module>rpc</module>

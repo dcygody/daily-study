@@ -1,4 +1,4 @@
-package cn.zing;
+package cn.zing.lock;
 
 /**
  * @description:
