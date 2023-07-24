@@ -11,6 +11,7 @@
         <module>leetcode</module>
         <module>netty-demo</module>
         <module>rpc</module>
+        <module>dcy-springboot</module>
     </modules>
     <name>daily</name>
     <description>Demo project for Spring Boot</description>
@@ -21,14 +22,14 @@
         <netty.version>4.1.44.Final</netty.version>
         <fastjson.version>2.0.26</fastjson.version>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-    </dependencies>
+
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
             <!--            Netty-->
             <dependency>
                 <groupId>io.netty</groupId>

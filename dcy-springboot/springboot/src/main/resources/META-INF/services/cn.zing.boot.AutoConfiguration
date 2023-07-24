@@ -1,0 +1,3 @@
+cn.zing.boot.WebServerAutoConfiguration
+cn.zing.boot.TransactionAutoConfiguration
+cn.zing.boot.AopAutoConfiguration
