@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @description: 771. 宝石与石头 https://leetcode.cn/problems/jewels-and-stones/
  *
@@ -17,7 +20,7 @@
 public class JewelsAndStones {
 
 
-    public int numJewelsInStones(String jewels, String stones) {
+    public int numJewelsInStones2(String jewels, String stones) {
 
         int oldLen = stones.length();
         for (int i = 0; i < jewels.length(); i++) {
@@ -29,6 +32,23 @@ public class JewelsAndStones {
         return oldLen - stones.length();
 
     }
+
+    public int numJewelsInStones(String jewels, String stones) {
+
+        int res = 0;
+        List<Character> list = new ArrayList<>();
+        for (int i = 0; i < jewels.length(); i++) {
+            list.add(jewels.charAt(i));
+        }
+        for (int i = 0; i < stones.length(); i++) {
+            if (list.contains(stones.charAt(i))) {
+                res++;
+            }
+        }
+        return res;
+
+    }
+
 
     public static void main(String[] args) {
         JewelsAndStones jewelsAndStones = new JewelsAndStones();
