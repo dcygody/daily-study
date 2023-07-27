@@ -1,0 +1,51 @@
+{
+  "name": "hj212",
+  "start": "extract",
+  "type": "netty",
+  "enable": true,
+  "log2db": false,
+  "task": {
+    "extract": {
+      "async": false,
+      "start": "cn.zing.hj212.server.netty.NettyStart",
+      "params": {
+        "port": "10711"
+      },
+      "next": [
+        "resolving"
+      ]
+    },
+    "resolving": {
+      "async": false,
+      "processor": "cn.zing.hj212.server.netty.protocol.hj212.HJ212ResolvingProcessor",
+      "params": {
+      },
+      "preProcessor": "",
+      "postProcessor": "",
+      "next": [
+        "transfer"
+      ]
+    },
+    "transfer": {
+      "async": false,
+      "processor": "cn.zing.hj212.server.netty.protocol.hj212.TransferStructure",
+      "params": {
+      },
+      "preProcessor": "",
+      "postProcessor": "",
+      "next": [
+        "load"
+      ]
+    },
+    "load": {
+      "async": false,
+      "processor": "cn.zing.hj212.server.netty.protocol.hj212.LoadStructure",
+      "params": {
+      },
+      "preProcessor": "",
+      "postProcessor": "",
+      "next": [
+      ]
+    }
+  }
+}
