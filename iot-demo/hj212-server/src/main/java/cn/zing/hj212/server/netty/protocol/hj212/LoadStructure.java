@@ -31,7 +31,7 @@ public class LoadStructure extends Processor {
         data.put("mn", MN);
         data.put("value", node);
 
-        log.info("入库::::{}", data.toString());
+        log.info("数据入库:::{}", data.toString());
 
     }
 }

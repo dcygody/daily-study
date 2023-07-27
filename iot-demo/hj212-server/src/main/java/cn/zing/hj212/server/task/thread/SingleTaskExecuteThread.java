@@ -9,7 +9,6 @@ import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -20,7 +19,7 @@ import java.util.LinkedList;
  * @author: dcy
  * @create: 2023-07-27 14:20
  */
-public class SingleTaskExecuteThread extends Thread{
+public class SingleTaskExecuteThread extends Thread {
 
     private final static Logger log = LoggerFactory.getLogger(SingleTaskExecuteThread.class);
 
@@ -31,7 +30,9 @@ public class SingleTaskExecuteThread extends Thread{
     }
 
     LinkedList<JSONObject> taskConfig = new LinkedList<>();
-    /** 单个任务的所有节点 */
+    /**
+     * 单个任务的所有节点
+     */
     LinkedList<NodeContainer> tasks = new LinkedList<>();
 
     // 任务节点排序
@@ -74,15 +75,15 @@ public class SingleTaskExecuteThread extends Thread{
                 // 例如: name=extract
                 bean.setName(obj.getString("name"));
 
-                // 没有前置处理器
-                if (!StringUtils.isEmpty(obj.getString("preProcessor"))) {
+                // 前置处理器
+                if (StringUtil.isNotBlank(obj.getString("preProcessor"))) {
                     z = Class.forName(obj.getString("preProcessor"));
                     step = (ProcessorImpl) z.getConstructor(JSONObject.class).newInstance(obj);
                     bean.setPreProcessor(step);
                 }
 
                 //只有当前一个处理器
-                if (!StringUtils.isEmpty(obj.getString("processor"))) {
+                if (StringUtil.isNotBlank(obj.getString("processor"))) {
                     z = Class.forName(obj.getString("processor"));
                     // 将当前配置传到构造器中
                     step = (ProcessorImpl) z.getConstructor(JSONObject.class).newInstance(obj);
@@ -90,7 +91,7 @@ public class SingleTaskExecuteThread extends Thread{
                     bean.setProcessor(step);
                 }
 
-                // 没有后置处理器
+                // 后置处理器
                 if (StringUtil.isNotBlank(obj.getString("postProcessor"))) {
                     z = Class.forName(obj.getString("postProcessor"));
                     step = (ProcessorImpl) z.getConstructor(JSONObject.class).newInstance(obj);
@@ -104,7 +105,6 @@ public class SingleTaskExecuteThread extends Thread{
             /*下面是找到第一个需要执行的任务, 并且启动, 就是启动Netty*/
             // 这个得到起始节点的任务, 就是netty
             JSONObject startConfig = config.getJSONObject("task").getJSONObject(config.getString("start"));
-            // 这个是类名: com.hw.one.startor.NettyStart
             String startClassName = startConfig.getString("start");
 
             Class<?> startClazz = Class.forName(startClassName);

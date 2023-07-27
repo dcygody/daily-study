@@ -11,8 +11,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author: dcy
  * @create: 2023-07-17 20:12
  */
-@Slf4j
 public class ReadWriteLockTest1 {
+
 
     private Object data;
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
@@ -21,27 +21,27 @@ public class ReadWriteLockTest1 {
 
 
     private void read() {
-        log.debug("准备获取读锁");
+//        log.debug("准备获取读锁");
         r.lock();
         try {
             // TODO 业务
-            log.debug("获取读锁, 读数据......");
+//            log.debug("获取读锁, 读数据......");
             data = "read";
             Thread.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             r.unlock();
-            log.debug("释放读锁......");
+//            log.debug("释放读锁......");
         }
     }
 
     private void write() {
-        log.debug("准备获取写锁...");
+//        log.debug("准备获取写锁...");
         w.lock();
         try {
             // TODO 业务
-            log.debug("获取写锁, 写数据......");
+//            log.debug("获取写锁, 写数据......");
             data = "write";
             Thread.sleep(3000);
 
@@ -49,7 +49,7 @@ public class ReadWriteLockTest1 {
             e.printStackTrace();
         } finally {
             w.unlock();
-            log.debug("释放写锁......");
+//            log.debug("释放写锁......");
         }
     }
 

@@ -57,6 +57,7 @@ public class MinimumOperationsToHalveArraySum {
         }
         return res;
     }
+
     private int max(float[] arr) {
         float max = arr[0];
         int maxIdx = 0;
@@ -81,7 +82,7 @@ public class MinimumOperationsToHalveArraySum {
      * 空间复杂度：O(n)
      */
     public int halveArray(int[] nums) {
-            PriorityQueue<Double> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        PriorityQueue<Double> pq = new PriorityQueue<>(Comparator.reverseOrder());
         double sum = 0;
         for (int num : nums) {
             pq.offer((double) num);
@@ -97,7 +98,6 @@ public class MinimumOperationsToHalveArraySum {
         }
         return res;
     }
-
 
 
     public static void main(String[] args) {

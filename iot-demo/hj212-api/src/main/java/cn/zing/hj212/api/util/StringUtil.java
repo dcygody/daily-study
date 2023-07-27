@@ -66,10 +66,7 @@ public class StringUtil {
     }
 
     public static boolean isNotBlank(String str) {
-        if (null != str && !str.equalsIgnoreCase("null") && str.length() > 0) {
-            return true;
-        }
-        return false;
+        return null != str && !str.equalsIgnoreCase("null") && str.length() > 0;
     }
 
     public static final String ZEROS = "00000000000000000000000000000000";
