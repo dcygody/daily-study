@@ -13,6 +13,7 @@
         <module>rpc</module>
         <module>dcy-springboot</module>
         <module>iot-demo</module>
+        <module>mianjing</module>
     </modules>
     <name>daily</name>
     <description>Demo project for Spring Boot</description>
