@@ -14,6 +14,7 @@
         <module>dcy-springboot</module>
         <module>iot-demo</module>
         <module>mianjing</module>
+        <module>spring-security-oauth2</module>
     </modules>
     <name>daily</name>
     <description>Demo project for Spring Boot</description>
