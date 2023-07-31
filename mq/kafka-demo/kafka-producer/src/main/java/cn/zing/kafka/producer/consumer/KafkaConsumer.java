@@ -33,13 +33,13 @@ public class KafkaConsumer {
     }
 
     //配置多个消费组
-    /*@KafkaListener(topics = "my-replicated-topic",groupId = "tulingGroup")
-    public void listenTulingGroup(ConsumerRecord<String, String> record, Acknowledgment ack) {
+    @KafkaListener(topics = "test",groupId = "dcyGroup")
+    public void listenDcyGroup(ConsumerRecord<String, String> record, Acknowledgment ack) {
         String value = record.value();
         System.out.println(value);
         System.out.println(record);
         ack.acknowledge();
-    }*/
+    }
 }
 
 
