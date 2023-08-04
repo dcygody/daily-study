@@ -30,6 +30,7 @@ public class DataTimer {
 //                SerializerFeature.WriteDateUseDateFormat);
         log.info("读取配置1: {}", this.sendJson);
         log.info("读取配置2: {}", this.respJson);
+
     }
 
     /**

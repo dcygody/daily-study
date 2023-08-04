@@ -36,24 +36,32 @@ public class ClientStart {
     }
 
     @PostConstruct
-    public void start() throws InterruptedException {
-
+    public void start() {
+        if (DataRepo.DEVICE_LIST.size() == 0) {
+            for (int i = 1; i <= DataRepo.DEVICE_SIZE; i++) {
+                DataRepo.DEVICE_LIST.add("LP00" + i);
+            }
+        }
         for (String mn : DataRepo.DEVICE_LIST) {
-            Executors.newSingleThreadExecutor().execute(() -> {
-                startClient(ClientSetting.SERVER_ADDR, ClientSetting.SERVER_PORT, mn);
-            });
-            Thread.sleep(1000);
+//            Executors.newSingleThreadExecutor().execute(() -> {
+                try {
+                    startClient(ClientSetting.SERVER_ADDR, ClientSetting.SERVER_PORT, mn);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+//            });
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
         }
     }
 
-    public void start(String mn) throws InterruptedException {
-        Executors.newSingleThreadExecutor().execute(() -> {
-            startClient(ClientSetting.SERVER_ADDR, ClientSetting.SERVER_PORT, mn);
-        });
-        Thread.sleep(1000);
-    }
 
-    public void startClient(String hostName, int port, String mn) {
+    public void startClient(String hostName, int port, String mn) throws InterruptedException {
         if (hostName != null && !"".equals(hostName)) {
             try {
                 bootstrap.remoteAddress(new InetSocketAddress(InetAddress.getByName(hostName), port));
@@ -64,16 +72,21 @@ public class ClientStart {
         } else {
             bootstrap.remoteAddress(new InetSocketAddress(port));
         }
+        ChannelFuture channelFuture = bootstrap.connect();
         try {
-            ChannelFuture channelFuture = bootstrap.connect();
             channelFuture.addListener(future -> {
                 if (future.isSuccess()) {
                     log.info("Channel「" + mn + "」" + "已连接");
                     DataRepo.DEVICE_CHANNEL.put(mn, channelFuture.channel());
-                } else {
+                }
+                else {
                     log.info("Channel「" + mn + "」" + "连接失败，正在尝试重连");
                     channelFuture.channel().eventLoop().schedule(() -> {
-                        startClient(hostName, port, mn);
+                        try {
+                            startClient(hostName, port, mn);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }, 10, TimeUnit.SECONDS);
                 }
             });

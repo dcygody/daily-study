@@ -1,7 +1,9 @@
 package cn.zing.netty.client.handler;
 
 import cn.zing.netty.client.ClientStart;
+import cn.zing.netty.client.config.ClientSetting;
 import cn.zing.netty.client.repo.DataRepo;
+import cn.zing.netty.client.util.SpringUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -18,17 +20,17 @@ public class ConfigHandler extends ChannelDuplexHandler {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         log.warn("{} 断开连接", ctx.channel().id().asShortText());
-        Channel channel = ctx.channel();
+        ClientStart clientStart = SpringUtil.getBean(ClientStart.class);
         DataRepo.DEVICE_CHANNEL.forEach((mn, ch) -> {
-            if (ch.equals(channel)) {
-                ClientStart clientStart = new ClientStart();
+            if (ch.equals(ctx.channel())) {
                 try {
-                    clientStart.start(mn);
+                    clientStart.startClient(ClientSetting.SERVER_ADDR, ClientSetting.SERVER_PORT, mn);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         });
+        super.channelInactive(ctx);
     }
 
     @Override
