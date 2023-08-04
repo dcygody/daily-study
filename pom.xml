@@ -14,7 +14,7 @@
         <module>dcy-springboot</module>
         <module>iot-demo</module>
         <module>mianjing</module>
-        <module>spring-security-oauth2</module>
+        <module>spring-security-demo</module>
         <module>mq</module>
     </modules>
     <name>daily</name>
@@ -25,6 +25,15 @@
         <lombok.version>1.18.28</lombok.version>
         <netty.version>4.1.44.Final</netty.version>
         <fastjson.version>2.0.26</fastjson.version>
+        <druid.version>1.2.16</druid.version>
+        <mysql.version>8.0.29</mysql.version>
+        <mybatis.version>3.5.2</mybatis.version>
+        <commons.io.version>2.11.0</commons.io.version>
+        <pagehelper.boot.version>1.4.6</pagehelper.boot.version>
+        <jwt.version>0.9.0</jwt.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <easyexcel.version>3.2.1</easyexcel.version>
+        <jjwt.version>0.11.1</jjwt.version>
     </properties>
 
     <dependencyManagement>
@@ -64,6 +73,65 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring.boot.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <!--jwt依赖-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <!--jwt-->
+            <!-- 阿里数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- pagehelper 分页插件 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
+            </dependency>
+
+            <!-- io常用工具类 -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+            <!-- Mysql驱动包 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
+            <!--常用工具类 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
