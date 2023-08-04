@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "0e18bdb8-637c-4efa-9d70-26ac5ff69e8f",
+		"name": "SpringSecurity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "5954558"
+	},
+	"item": [
+		{
+			"name": "学生信息",
+			"item": [
+				{
+					"name": "添加",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stuName\": \"阿二\",\r\n    \"stuNo\":\"2020218112\",\r\n    \"stuAge\": 22,\r\n    \"stuSex\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8888/stu/add"
+					},
+					"response": []
+				},
+				{
+					"name": "列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8888/stu/list"
+					},
+					"response": []
+				},
+				{
+					"name": "修改",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"id\": 1,\r\n    \"stuName\": \"阿大\",\r\n    \"stuNo\": \"2020218122\",\r\n    \"stuSex\": 1,\r\n    \"stuAge\": 26\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8888/stu/update"
+					},
+					"response": []
+				},
+				{
+					"name": "删除",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/stu/delete?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"stu",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "批量插入",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/stu/test?n=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"stu",
+								"test"
+							],
+							"query": [
+								{
+									"key": "n",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "导出",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "查看",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI3NmMzZjVhZGZkNGM0ODY2YmEyZGY0MGEwZmM3ZWJmMCIsInN1YiI6IjEiLCJpc3MiOiJkY3l5eSIsImlhdCI6MTY4ODgxMzgzMiwiZXhwIjoxNjg4ODQ5ODMyfQ.BvWQ_YyYoEl0R_zubZVw1WnS0XdbVOqDXl3PTGdi2-w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8888/stu/get?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"stu",
+								"get"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "登录",
+			"item": [
+				{
+					"name": "登录",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userAccount\": \"admin\",\r\n    \"password\":\"ydlclass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8888/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "退出",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI3MDZhZWMwYTRjNDQ0ODRjYjQ0NDlhYWJjMDQ5NjAzZSIsInN1YiI6ImViMTRiMGZiLTkwNGItNDg3Yy1iOWRkLWQ5MDdmMzk5N2IxMyIsImlzcyI6ImRjeXl5IiwiaWF0IjoxNjg4Nzk0MTU0LCJleHAiOjE2ODg3OTc3NTR9.GHhSR6in1NO6OYUsvy-oXrLzGe4CbMIZZJs84Fcc1iU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userAccount\": \"admin\",\r\n    \"password\":\"ydlclass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8888/user/logout"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
