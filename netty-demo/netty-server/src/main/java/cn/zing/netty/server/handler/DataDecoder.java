@@ -38,44 +38,8 @@ public class DataDecoder extends ByteToMessageDecoder {
         // 收到的字符串
         String strData = new String(bytes);
 //        System.out.println(Arrays.toString(bytes));
-        // 这是升级包A开头
-        if (bytes[0] == 65) {
-            // 升级完整包头
-            if (strData.startsWith(DataTypeConst.A0A0)) {
-                // 完整的升级包
-                if (packLength >= UP_PACK_LEN) {
-                    // 重置读索引
-                    in.resetReaderIndex();
-                    // 只读取8
-                    bytes = new byte[UP_PACK_LEN];
-                    in.readBytes(bytes);
-                } else { // 升级到没到够, 等待
-                    log.info("升级包没到够, 等待: {}", packLength);
-                    // 重置读索引
-                    in.resetReaderIndex();
-                    return;
-                }
-            }
-            // 获取升级文件信息
-            if (strData.startsWith(DataTypeConst.A1A1)) {
-                if (packLength >= BASE_LEN) {
-                    // 重置读索引
-                    in.resetReaderIndex();
-                    // 只读取4
-                    bytes = new byte[BASE_LEN];
-                    in.readBytes(bytes);
-                } else {
-                    log.info("升级包信息没到够, 等待: {}", packLength);
-                    // 重置读索引
-                    in.resetReaderIndex();
-                    return;
-                }
-            }
-            out.add(bytes);
-            // 记录读索引的位置
-            in.markReaderIndex();
-            // 这是设备发送的数据 JSON 格式 {
-        } else if (bytes[0] == 123) {
+        // {
+        if (bytes[0] == 123) {
             // 如果不是json
             if (!JSONUtil.isJSON(strData)) {
 //                log.info("不是json: {}", strData);
@@ -147,9 +111,51 @@ public class DataDecoder extends ByteToMessageDecoder {
                 // 记录读索引的位置
 //                in.markReaderIndex();
             }
-
+        } else if (in.getByte(0) == 65) { // 这是升级包A开头
+            // 升级完整包头
+            if (strData.startsWith(DataTypeConst.A0A0)) {
+                // 完整的升级包
+                if (packLength >= UP_PACK_LEN) {
+                    // 重置读索引
+                    in.resetReaderIndex();
+                    // 只读取8
+                    bytes = new byte[UP_PACK_LEN];
+                    in.readBytes(bytes);
+                } else { // 升级到没到够, 等待
+                    log.info("升级包没到够, 等待: {}", packLength);
+                    // 重置读索引
+                    in.resetReaderIndex();
+                    return;
+                }
+            }
+            // 获取升级文件信息
+            if (strData.startsWith(DataTypeConst.A1A1)) {
+                if (packLength >= BASE_LEN) {
+                    // 重置读索引
+                    in.resetReaderIndex();
+                    // 只读取4
+                    bytes = new byte[BASE_LEN];
+                    in.readBytes(bytes);
+                } else {
+                    log.info("升级包信息没到够, 等待: {}", packLength);
+                    // 重置读索引
+                    in.resetReaderIndex();
+                    return;
+                }
+            }
+            out.add(bytes);
+            // 记录读索引的位置
+            in.markReaderIndex();
+            // 这是设备发送的数据 JSON 格式 {
         } else { // 这里是未知报文
-            log.warn("这是未知报文: {}", strData);
+            // 看看该报文是不是按照固定的分隔符
+            byte b = in.getByte(packLength - 1);
+            // \n
+            if (b == 0x0A) {
+                log.warn("这是按照行分割的报文: {}", strData);
+            } else {
+                log.warn("这是未知报文: {}", strData);
+            }
             out.add(bytes);
         }
 

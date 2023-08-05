@@ -29,7 +29,7 @@ public class DataInboundHandler extends ChannelInboundHandlerAdapter {
         String data = new String(bytes);
 //        System.out.println();
 //        System.out.println();
-//        log.info("业务逻辑收到: {}", data);
+        log.info("业务逻辑收到: {}", data);
 
         JSONObject json = JSONUtil.parseJSON(data);
         String type = DataTypeConst.UK;
