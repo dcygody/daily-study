@@ -1,8 +1,12 @@
 package cn.zing.boot.demo.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @description:
@@ -27,6 +31,18 @@ public class CorsConfig2 implements WebMvcConfigurer {
                 // 跨域允许时间
                 .maxAge(3600);
     }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        // swagger配置
+        registry.addResourceHandler("/swagger-ui/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
+                .setCacheControl(CacheControl.maxAge(5, TimeUnit.HOURS).cachePublic());
+        ;
+    }
+
+
 }
 
 

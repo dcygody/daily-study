@@ -27,6 +27,8 @@ logging:
 
 # Spring配置
 spring:
+  application:
+    name: spring boot demo
   profiles:
     active: druid
   # redis 配置
@@ -66,6 +68,13 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enabled: true
+  application-name: ${spring.application.name}
+  application-version: 1.0
+  application-description: springfox swagger 3.0整合Demo
+  try-host: http://localhost:${server.port}
 
 ## 防止XSS攻击
 #xss:

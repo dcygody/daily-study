@@ -21,7 +21,8 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
-        <spring.boot.version>2.7.13</spring.boot.version>
+<!--        <spring.boot.version>2.7.13</spring.boot.version>-->
+        <spring.boot.version>2.5.14</spring.boot.version>
         <lombok.version>1.18.28</lombok.version>
         <netty.version>4.1.44.Final</netty.version>
         <fastjson.version>2.0.26</fastjson.version>
@@ -34,10 +35,22 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <easyexcel.version>3.2.1</easyexcel.version>
         <jjwt.version>0.11.1</jjwt.version>
+        <swagger3.version>3.0.0</swagger3.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger3.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.swagger</groupId>
+                        <artifactId>swagger-models</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>

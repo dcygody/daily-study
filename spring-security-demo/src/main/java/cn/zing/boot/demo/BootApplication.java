@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("cn.zing.boot.demo.mapper")
+//@EnableWebMvc //不加这个注解会报错 Failed to start bean 'documentationPluginsBootstrapper' boot2.7.13;
 public class BootApplication {
 
     public static void main(String[] args) {
