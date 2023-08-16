@@ -48,17 +48,14 @@ public class FindTheLosersOfTheCircularGame {
         for (int i = 2; i <= n; i++) {
             list.add(i);
         }
+        // 球在哪个人手里
         int i = 1;
+        // 传递次数
         int j = 1;
-        while (i <= n) {
+        while (true) {
             i += j * k;
             j++;
-            if (i > n) {
-                i = i % n;
-                if (i == 0) {
-                    i = n;
-                }
-            }
+            i = i % n == 0 ? n : i % n;
             if (list.contains(i)) {
                 list.remove(Integer.valueOf(i));
             } else {
