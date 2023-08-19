@@ -17,6 +17,7 @@
         <module>spring-security-demo</module>
         <module>mq</module>
         <module>lingsuihua</module>
+        <module>dynamic-datasource</module>
     </modules>
     <name>daily</name>
     <description>Demo project for Spring Boot</description>

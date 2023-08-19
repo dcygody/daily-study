@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zing.dynamic.datasource.demo2.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="cn.zing.dynamic.datasource.demo2.bean.Student">
+    <!--@mbg.generated-->
+    <!--@Table student-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+    <result column="stu_no" jdbcType="VARCHAR" property="stuNo" />
+    <result column="stu_sex" jdbcType="INTEGER" property="stuSex" />
+    <result column="stu_age" jdbcType="INTEGER" property="stuAge" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, stu_name, stu_no, stu_sex, stu_age
+  </sql>
+</mapper>
