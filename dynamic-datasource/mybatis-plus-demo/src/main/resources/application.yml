@@ -37,9 +37,9 @@ spring:
           driver-class-name: com.mysql.cj.jdbc.Driver
           type: com.alibaba.druid.pool.DruidDataSource
         pg:
-          url: jdbc:postgresql://116.204.121.151:5432/idoc_zero_code
-          username: postgres
-          password: Cloudcmdi@2021
+          url: jdbc:postgresql://localhost:5432/idoc_zero_code
+          username: root
+          password: 123456
           driver-class-name: org.postgresql.Driver
           type: com.alibaba.druid.pool.DruidDataSource
 
