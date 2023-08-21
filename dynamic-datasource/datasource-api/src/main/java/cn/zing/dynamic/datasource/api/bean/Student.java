@@ -1,4 +1,4 @@
-package cn.zing.dynamic.datasource.demo1.bean;
+package cn.zing.dynamic.datasource.api.bean;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
