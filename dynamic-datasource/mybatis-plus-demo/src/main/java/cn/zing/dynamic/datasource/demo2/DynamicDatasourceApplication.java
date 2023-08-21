@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @create: 2023-08-18 17:15
  */
 @SpringBootApplication
-@MapperScan(basePackages = "cn.zing.dynamic.datasource.demo2.mapper")
+@MapperScan(basePackages = "cn.zing.dynamic.datasource.api.mapper")
 public class DynamicDatasourceApplication {
 
     public static void main(String[] args) {

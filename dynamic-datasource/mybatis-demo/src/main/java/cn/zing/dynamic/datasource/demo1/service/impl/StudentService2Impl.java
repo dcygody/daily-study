@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@Service("StuService1")
-@DSM("mysql1")
-public class StudentServiceImpl  extends ServiceImpl<StudentMapper, Student>  implements StudentService {
+@Service("StuService2")
+@DSM("mysql2")
+public class StudentService2Impl extends ServiceImpl<StudentMapper, Student> implements StudentService {
 
     @Resource
     StudentMapper studentMapper;

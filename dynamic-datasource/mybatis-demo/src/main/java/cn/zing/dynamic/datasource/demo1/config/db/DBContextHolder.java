@@ -19,14 +19,6 @@ public class DBContextHolder {
         return contextHolder.get();
     }
 
-    public static void pg() {
-        set(DBTypeEnum.PG);
-    }
-
-    public static void mysql() {
-        set(DBTypeEnum.MYSQL);
-    }
-
 }
 
 

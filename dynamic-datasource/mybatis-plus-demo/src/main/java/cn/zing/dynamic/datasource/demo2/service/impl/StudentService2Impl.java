@@ -7,9 +7,9 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
-@DS("mysql1")
-@Service("StuService1")
-public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService{
+@DS("mysql2")
+@Service("StuService2")
+public class StudentService2Impl extends ServiceImpl<StudentMapper, Student> implements StudentService {
 
     @Override
     public Student getStudent(Integer id) {

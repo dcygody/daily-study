@@ -1,14 +1,13 @@
 package cn.zing.dynamic.datasource.demo2;
 
-import cn.zing.dynamic.datasource.demo2.bean.Student;
-import cn.zing.dynamic.datasource.demo2.bean.TTest;
-import cn.zing.dynamic.datasource.demo2.service.StudentService;
-import cn.zing.dynamic.datasource.demo2.service.TTestService;
+import cn.zing.dynamic.datasource.api.bean.Student;
+import cn.zing.dynamic.datasource.api.service.StudentService;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.ToString;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
@@ -19,29 +18,33 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class DyDemo2Test {
 
+    @Qualifier("StuService1")
     @Autowired
-    StudentService studentService;
+    StudentService studentService1;
 
+
+    @Qualifier("StuService2")
     @Autowired
-    TTestService tTestService;
+    StudentService studentService2;
 
     @Test
-    void mysql() {
+    void mysql1() {
         LambdaQueryWrapper<Student> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Student::getId, 1);
-        Student student = studentService.getOne(queryWrapper);
+        Student student = studentService1.getOne(queryWrapper);
 
         System.out.println("----------->" + JSON.toJSONString(student));
     }
 
     @Test
-    void pg() {
-        LambdaQueryWrapper<TTest> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(TTest::getId, "d45202ee-bb68-4438-b540-af30704fddad");
-        TTest tTest = tTestService.getOne(queryWrapper);
+    void mysql2() {
+        LambdaQueryWrapper<Student> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Student::getId, 9);
+        Student student = studentService2.getOne(queryWrapper);
 
-        System.out.println("----------->" + JSON.toJSONString(tTest));
+        System.out.println("----------->" + JSON.toJSONString(student));
     }
+
 }
 
 

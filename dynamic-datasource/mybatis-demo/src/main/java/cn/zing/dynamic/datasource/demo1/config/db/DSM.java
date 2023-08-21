@@ -10,5 +10,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface DSM {
 
-    DBTypeEnum value() default DBTypeEnum.PG;
+    String value();
 }

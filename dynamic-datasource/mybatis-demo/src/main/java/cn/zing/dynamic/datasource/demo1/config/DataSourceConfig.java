@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -30,16 +29,16 @@ public class DataSourceConfig {
     @Value("${spring.datasource.primary}")
     private String defaultDataSource;
 
-    @Bean(name = "pg")
-    @ConfigurationProperties("spring.datasource.pg")
+    @Bean(name = "mysql1")
+    @ConfigurationProperties("spring.datasource.mysql1")
     public DataSource pgDataSource() {
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return dataSource;
     }
 
     @Primary
-    @Bean(name = "mysql")
-    @ConfigurationProperties("spring.datasource.mysql")
+    @Bean(name = "mysql2")
+    @ConfigurationProperties("spring.datasource.mysql2")
     public DataSource mysqlDataSource() {
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         return dataSource;
@@ -48,12 +47,12 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource myRoutingDataSource(
-            @Qualifier("pg") DataSource pg,
-            @Qualifier("mysql") DataSource mysql
+            @Qualifier("mysql1") DataSource mysql1,
+            @Qualifier("mysql2") DataSource mysql2
             ) {
         Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DBTypeEnum.PG, pg);
-        targetDataSources.put(DBTypeEnum.MYSQL, mysql);
+        targetDataSources.put(DBTypeEnum.MYSQL1, mysql1);
+        targetDataSources.put(DBTypeEnum.MYSQL2, mysql2);
         MyRoutingDataSource myRoutingDataSource = new MyRoutingDataSource();
 
         DBTypeEnum dbTypeEnum = DBTypeEnum.valueOf(defaultDataSource.toUpperCase());
