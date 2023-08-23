@@ -3,17 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>daily</artifactId>
+        <artifactId>rabbitmq-demo</artifactId>
         <groupId>cn.zing</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mq</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>kafka-demo</module>
-        <module>rabbitmq-demo</module>
-    </modules>
+    <artifactId>basic-demo</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+        </dependency>
+    </dependencies>
 </project>

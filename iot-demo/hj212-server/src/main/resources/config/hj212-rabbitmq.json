@@ -1,0 +1,56 @@
+{
+  "name": "hj212-RabbitMQ",
+  "start": "extract",
+  "type": "rabbitmq",
+  "enable": true,
+  "log2db": false,
+  "task": {
+    "extract": {
+      "async": false,
+      "start": "cn.zing.hj212.server.rabbitmq.RabbitMQStart",
+      "params": {
+        "username":"admin",
+        "password": "admin",
+        "virtualHost": "/mirror",
+        "host": "192.168.198.133",
+        "port": "5672",
+        "routerKey": "hj212-q"
+      },
+      "next": [
+        "resolving"
+      ]
+    },
+    "resolving": {
+      "async": false,
+      "processor": "cn.zing.hj212.server.parse.resolving.HJ212ResolvingProcessor",
+      "params": {
+      },
+      "preProcessor": "",
+      "postProcessor": "",
+      "next": [
+        "transfer"
+      ]
+    },
+    "transfer": {
+      "async": false,
+      "processor": "cn.zing.hj212.server.parse.transfer.TransferStructure",
+      "params": {
+      },
+      "preProcessor": "",
+      "postProcessor": "",
+      "next": [
+        "load"
+      ]
+    },
+    "load": {
+      "async": false,
+      "processor": "cn.zing.hj212.server.parse.load.LoadStructure",
+      "params": {
+      },
+      "preProcessor": "",
+      "postProcessor": "",
+      "next": [
+      ]
+    }
+  }
+}

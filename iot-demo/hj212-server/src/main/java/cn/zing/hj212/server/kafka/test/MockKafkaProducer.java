@@ -19,16 +19,16 @@ public class MockKafkaProducer {
     public static Properties initProperties(){
         Properties prop = new Properties();
 
-        /**
+        /*
          * ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG属性：指定 key的序列化器
          */
         prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        /**
+        /*
          * ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG属性：指定 value 的序列化器
          */
         prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
-        /**
+        /*
          * ProducerConfig.BOOTSTRAP_SERVERS_CONFIG 属性：指定生产者连接的kafka集群的地址
          * 格式： host1:port1,host2:port2,host3:port3
          * 可以设置一个或者多个地址，中间以逗号分隔。此参数默认为 ""
@@ -38,7 +38,7 @@ public class MockKafkaProducer {
         prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, brokerList);
         //prop.put("broker.id",0);
 
-        /**
+        /*
          * ProducerConfig.CLIENT_ID_CONFIG=client.id属性： 设置KafkaProducer对应的客户端id
          * 默认为""
          * 如果客户端不设置，那么kafka会自动生成一个：形式如 producer-1，producer-2 等
@@ -54,7 +54,7 @@ public class MockKafkaProducer {
         //1. 创建kafka的客户端，并配置参数
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(prop);
 
-        /**
+        /*
          * 1.1 创建kafka的客户端 并指定 key和value所使用的 序列化 类
          */
         //KafkaProducer<String, String> producer = new KafkaProducer<>(prop,new StringSerializer(),new StringSerializer());
