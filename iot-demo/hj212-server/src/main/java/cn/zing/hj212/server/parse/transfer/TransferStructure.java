@@ -1,4 +1,4 @@
-package cn.zing.hj212.server.netty.protocol.hj212;
+package cn.zing.hj212.server.parse.transfer;
 
 import cn.zing.hj212.api.enm.PollutionAll;
 import cn.zing.hj212.api.processer.Processor;
@@ -111,7 +111,7 @@ public class TransferStructure extends Processor {
 
         nodedata.put("data", data);
 //        nodedata.put("key", key);
-        log.info("二级解析:::{}", nodedata);
+//        log.info("二级解析:::{}", nodedata);
     }
 }
 

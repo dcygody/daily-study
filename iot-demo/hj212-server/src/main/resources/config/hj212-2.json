@@ -1,15 +1,17 @@
 {
-  "name": "hj212-netty",
+  "name": "hj212-kafka",
   "start": "extract",
-  "type": "netty",
+  "type": "Kafka",
   "enable": true,
   "log2db": false,
   "task": {
     "extract": {
       "async": false,
-      "start": "cn.zing.hj212.server.netty.NettyStart",
+      "start": "cn.zing.hj212.server.kafka.KafkaStart",
       "params": {
-        "port": "10711"
+        "brokerList": "192.168.198.133:9092",
+        "topic": "hj212-topic",
+        "groupId": "hj212-group"
       },
       "next": [
         "resolving"

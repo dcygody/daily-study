@@ -43,8 +43,13 @@ public class SessionMgr {
 
 
     public static void putSession(ChannelHandlerContext ctx, String mn) {
+        if (null == ctx || null == mn) {
+            return;
+        }
         setDeviceId(ctx, mn);
-        CHANNEL_MAP.put(mn, ctx.channel());
+        if (!CHANNEL_MAP.containsValue(ctx.channel())) {
+            CHANNEL_MAP.put(mn, ctx.channel());
+        }
 
     }
 
@@ -76,7 +81,7 @@ public class SessionMgr {
             return;
         }
         CHANNEL_MAP.remove(mn);
-        log.info("设备[{}]4G连接成功移除", mn);
+        log.info("设备[{}] 4G连接成功移除", mn);
         // 优雅关闭
         ctx.close();
 

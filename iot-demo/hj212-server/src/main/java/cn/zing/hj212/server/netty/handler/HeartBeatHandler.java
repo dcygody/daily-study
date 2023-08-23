@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * 心跳检测
  */
 @Slf4j
+@Deprecated
 public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
 
 
@@ -20,7 +21,7 @@ public class HeartBeatHandler extends ChannelInboundHandlerAdapter {
             case READER_IDLE:
                 String mn = SessionMgr.getDeviceId(ctx);
                 if (null != mn) {
-                    log.error("设备[{}] 5分钟没有发送心跳, 即将断开连接", mn);
+                    log.error("设备[{}] 5分钟没有发送数据, 即将断开连接", mn);
                 } else {
                     log.error("Channel[{}] 5分钟没有发送心跳, 即将断开连接", ctx.channel().id());
                 }

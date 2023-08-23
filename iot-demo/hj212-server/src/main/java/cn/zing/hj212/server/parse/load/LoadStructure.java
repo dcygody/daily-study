@@ -1,4 +1,4 @@
-package cn.zing.hj212.server.netty.protocol.hj212;
+package cn.zing.hj212.server.parse.load;
 
 
 import cn.zing.hj212.api.processer.Processor;

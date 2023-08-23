@@ -1,4 +1,4 @@
-package cn.zing.hj212.server.netty.protocol.hj212;
+package cn.zing.hj212.server.parse.resolving;
 
 import cn.zing.hj212.api.processer.Processor;
 import cn.zing.hj212.api.util.CRC16Util;
@@ -88,9 +88,6 @@ public class HJ212ResolvingProcessor extends Processor {
 
         String flag = headMap.getString("Flag");
         String dataTime = dataMap.getString("DataTime");
-        // Session 管理
-        SessionMgr.putSession(ctx, mn);
-
         // 数据包长度校验 212包长度不会少于67
         if (msg.length() < 67) {
             QnRtn = "100";
@@ -189,6 +186,8 @@ public class HJ212ResolvingProcessor extends Processor {
             if (flagStr.substring(7, 8).equals("1")) {
                 String ret = "QN=" + qn + ";ST=91;CN=9014;PW=" + pw + ";MN=" + mn + ";Flag=4;CP=&&QnRtn=" + QnRtn + ";ExeRtn=" + ExeRtn + "&&";
                 ret = "##" + StringUtil.getLength(ret) + ret + CRC16Util.calcCrc16(ret) + "\r\n";
+                // Session 管理
+                SessionMgr.putSession(ctx, mn);
                 ctx.writeAndFlush(ret);
             }
         }
@@ -216,7 +215,7 @@ public class HJ212ResolvingProcessor extends Processor {
         headMap.put("dataType", dataType);
         dta.put("headMap", headMap);
         dta.put("dataMap", dataMap);
-        log.info("一级解析:::{}", dta);
+//        log.info("一级解析:::{}", dta);
     }
 }
 

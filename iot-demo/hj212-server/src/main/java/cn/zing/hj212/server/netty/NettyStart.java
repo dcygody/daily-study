@@ -2,22 +2,20 @@ package cn.zing.hj212.server.netty;
 
 import cn.zing.hj212.api.util.DateUtil;
 import cn.zing.hj212.server.netty.handler.ConfigHandler;
-import cn.zing.hj212.server.netty.handler.HeartBeatHandler;
+import cn.zing.hj212.server.netty.session.SessionMgr;
 import cn.zing.hj212.server.stater.AbstractStarter;
 import com.alibaba.fastjson2.JSONObject;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,16 +51,19 @@ public class NettyStart extends AbstractStarter {
                                     .addLast(new ConfigHandler())
                                     .addLast(new StringEncoder())
                                     .addLast(new StringDecoder())
+                                    // 心跳监测, 如果1min内没有发送消息就断开连接
+                                    .addLast(new IdleStateHandler(60, 0, 0, TimeUnit.SECONDS))
                                     .addLast(new ChannelInboundHandlerAdapter() {
                                         @Override
                                         public void channelRead(ChannelHandlerContext ctx, Object msg) {
                                             JSONObject data = new JSONObject();
                                             InetSocketAddress insocket = (InetSocketAddress) ctx.channel().remoteAddress();
                                             String message = (String) msg;
-                                            log.info("收到: {}", message);
+                                            log.info("Netty 收到: {}", message);
                                             data.put("ip", insocket.getAddress().getHostAddress());
                                             data.put("port", insocket.getPort());
                                             data.put("receiveTime", DateUtil.getCurrentMilliTime());
+                                            data.put("source", "Netty");
                                             // 这是接收到数据的处理
                                             JSONObject nodedata = new JSONObject();
                                             nodedata.put("ctx", ctx);
@@ -74,9 +75,29 @@ public class NettyStart extends AbstractStarter {
                                                 dispatch(data);
                                             }
                                         }
-                                    })
-                                    .addLast(new IdleStateHandler(60, 0, 0, TimeUnit.SECONDS)) // 心跳监测, 如果1min内没有发送消息就断开连接
-                                    .addLast(new HeartBeatHandler());
+                                        @Override
+                                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+                                            IdleStateEvent event = (IdleStateEvent) evt;
+                                            switch (event.state()) {
+                                                case READER_IDLE:
+                                                    String mn = SessionMgr.getDeviceId(ctx);
+                                                    if (null != mn) {
+                                                        log.error("设备[{}] 5分钟没有发送数据, 即将断开连接", mn);
+                                                    } else {
+                                                        log.error("Channel[{}] 5分钟没有发送心跳, 即将断开连接", ctx.channel().id());
+                                                    }
+                                                    SessionMgr.removeSession(ctx);
+                                                    break;
+                                                case WRITER_IDLE:
+                                                    break;
+                                                case ALL_IDLE:
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
+                                        }
+                                    });
+
                         }
                     });
             ChannelFuture f = b.bind(port).sync();
