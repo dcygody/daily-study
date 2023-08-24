@@ -11,4 +11,6 @@ public interface DcyAvatarService extends IService<DcyAvatar>{
     boolean addAvatar(DcyAvatar avatar);
 
     List<DcyAvatar> avatarList();
+
+    List<DcyAvatar> avatarListBatch();
 }

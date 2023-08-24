@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -69,6 +70,20 @@ public class TestController {
 //        System.out.println("用时: " + (end -start));
 
         return FileUtil.compressData(JSON.toJSONString(list));
+    }
+
+    /**
+     * 批量请求
+     * y=1压缩 y=0 不压缩
+     */
+    @GetMapping("/avatar/list3")
+    public Object avatarList3(@RequestParam int y) throws IOException {
+//        System.out.println("-----------> " + y);
+        List<DcyAvatar> list = avatarService.avatarListBatch();
+        if (y == 1) {
+            return FileUtil.compressData(JSON.toJSONString(list));
+        }
+        return list;
     }
 }
 
