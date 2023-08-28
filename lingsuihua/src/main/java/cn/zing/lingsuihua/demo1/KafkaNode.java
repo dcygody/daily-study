@@ -12,8 +12,6 @@ import lombok.EqualsAndHashCode;
 @Data
 public class KafkaNode extends Node{
 
-    private String name;
-
     public KafkaNode(String name) {
         this.name = name;
     }

@@ -21,7 +21,8 @@ public class Main {
         nodeDTO.setPostProcessor(post);
 
         NodeService nodeService = new NodeService(nodeDTO);
-        System.out.println(nodeService.execute());
+        Node node = nodeService.execute();
+        System.out.println(node.name);
     }
 }
 

@@ -7,7 +7,9 @@ package cn.zing.lingsuihua.demo1;
  */
 public class RabbitMQNode extends Node{
 
-    private String name;
+    public RabbitMQNode(String name) {
+        this.name = name;
+    }
 }
 
 

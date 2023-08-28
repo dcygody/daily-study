@@ -6,6 +6,9 @@ package cn.zing.lingsuihua.demo1;
  * @create: 2023-08-28 10:13
  */
 public class Node {
+
+    public String name;
+
 }
 
 
