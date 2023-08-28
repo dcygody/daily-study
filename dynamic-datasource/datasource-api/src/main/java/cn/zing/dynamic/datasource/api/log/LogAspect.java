@@ -37,7 +37,7 @@ public class LogAspect {
         methodName = className + "." + methodName;
         // 请求参数
         Object[] args = joinPoint.getArgs();
-        String logDesc = logAnnotation.desc().equals("") ? "未知方法" : logAnnotation.desc();
+        String logDesc = logAnnotation.value().equals("") ? "未知方法" : logAnnotation.value();
         // 响应参数
         long startTime = System.currentTimeMillis();
         Object result = joinPoint.proceed();
