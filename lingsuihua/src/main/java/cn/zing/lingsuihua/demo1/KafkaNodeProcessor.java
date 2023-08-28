@@ -12,7 +12,7 @@ public class KafkaNodeProcessor extends NodeProcessor{
     public Node execute(Object data) {
         NodeDTO nodeDTO = (NodeDTO) data;
         System.out.println("Kafka执行器");
-
+        // 这里把参数传递进去,,,
         return new KafkaNode(nodeDTO.getName());
     }
 }
