@@ -1,5 +1,6 @@
-package cn.zing.lingsuihua.demo1;
+package cn.zing.lingsuihua.demo1.node;
 
+import cn.zing.lingsuihua.demo1.node.Node;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,7 +11,7 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class KafkaNode extends Node{
+public class KafkaNode extends Node {
 
     public KafkaNode(String name) {
         this.name = name;

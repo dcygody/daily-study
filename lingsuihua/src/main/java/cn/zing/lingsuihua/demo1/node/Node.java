@@ -1,4 +1,4 @@
-package cn.zing.lingsuihua.demo1;
+package cn.zing.lingsuihua.demo1.node;
 
 /**
  * @description:

@@ -1,4 +1,7 @@
-package cn.zing.lingsuihua.demo1;
+package cn.zing.lingsuihua.demo1.service;
+
+import cn.zing.lingsuihua.demo1.node.Node;
+import cn.zing.lingsuihua.demo1.node.NodeDTO;
 
 /**
  * @description:
@@ -7,7 +10,7 @@ package cn.zing.lingsuihua.demo1;
  */
 public class NodeService implements Processor<Node> {
 
-    public NodeDTO nodeDTO;
+    private final NodeDTO nodeDTO;
 
     public NodeService(NodeDTO nodeDTO) {
         this.nodeDTO = nodeDTO;

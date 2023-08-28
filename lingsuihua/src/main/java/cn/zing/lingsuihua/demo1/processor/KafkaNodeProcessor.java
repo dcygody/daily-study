@@ -1,4 +1,8 @@
-package cn.zing.lingsuihua.demo1;
+package cn.zing.lingsuihua.demo1.processor;
+
+import cn.zing.lingsuihua.demo1.node.KafkaNode;
+import cn.zing.lingsuihua.demo1.node.Node;
+import cn.zing.lingsuihua.demo1.node.NodeDTO;
 
 /**
  * @description:
@@ -12,7 +16,7 @@ public class KafkaNodeProcessor extends NodeProcessor{
     public Node execute(Object data) {
         NodeDTO nodeDTO = (NodeDTO) data;
         System.out.println("Kafka执行器");
-        // 这里把参数传递进去,,,
+
         return new KafkaNode(nodeDTO.getName());
     }
 }

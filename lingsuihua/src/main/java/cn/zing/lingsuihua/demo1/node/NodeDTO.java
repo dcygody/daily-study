@@ -1,4 +1,6 @@
-package cn.zing.lingsuihua.demo1;
+package cn.zing.lingsuihua.demo1.node;
+
+import cn.zing.lingsuihua.demo1.processor.NodeProcessorImpl;
 
 /**
  * @description:
