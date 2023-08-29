@@ -1,5 +1,7 @@
 package cn.zing.dynamic.datasource.api.log;
 
+import cn.zing.dynamic.datasource.api.util.HttpContextUtil;
+import cn.zing.dynamic.datasource.api.util.IPUtil;
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -8,7 +10,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**
@@ -42,7 +48,10 @@ public class LogAspect {
         long startTime = System.currentTimeMillis();
         Object result = joinPoint.proceed();
         long endTime = System.currentTimeMillis();
-        LogInfo logInfo = new LogInfo( methodName, JSON.toJSONString(args), logDesc, JSON.toJSONString(result), startTime, endTime);
+        HttpServletRequest request = HttpContextUtil.getHttpServletRequest();
+        // 访问ip
+        String ip = IPUtil.getIpAddr(request);
+        LogInfo logInfo = new LogInfo( methodName, JSON.toJSONString(args), logDesc, JSON.toJSONString(result), startTime, endTime, ip);
         log.info("【记录日志】: {}", logInfo.toString());
 
         return result;

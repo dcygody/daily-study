@@ -33,13 +33,16 @@ public class LogInfo {
 
     private long endTime;
 
-    public LogInfo(String methodName, String requestArgs, String desc, String responseArgs, long startTime, long endTime) {
+    private String ip;
+
+    public LogInfo(String methodName, String requestArgs, String desc, String responseArgs, long startTime, long endTime, String ip) {
         this.methodName = methodName;
         this.requestArgs = requestArgs;
         this.desc = desc;
         this.responseArgs = responseArgs;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.ip = ip;
     }
 
     @Override
@@ -50,6 +53,7 @@ public class LogInfo {
                 ", requestArgs='" + requestArgs + '\'' +
                 ", desc='" + desc + '\'' +
                 ", responseArgs='" + responseArgs + '\'' +
+                ", ip='" + ip + '\'' +
                 ", startTime=" + LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime), ZoneId.systemDefault()).toString() +
                 ", endTime=" + LocalDateTime.ofInstant(Instant.ofEpochMilli(endTime), ZoneId.systemDefault()).toString() +
                 '}';
